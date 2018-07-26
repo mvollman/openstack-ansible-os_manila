@@ -1,0 +1,13 @@
+- name: Install manila server
+  hosts: manila_all
+  user: root
+  roles:
+    - { role: "os_manila", tags: [ "os-manila" ] }
+  vars:
+    external_lb_vip_address: 172.16.24.1
+    internal_lb_vip_address: 192.168.0.1
+    manila_galera_address: "{{ internal_lb_vip_address }}"
+    manila_root_user: root
+  vars_prompt:
+    - name: "galera_root_password"
+      prompt: "What is galera_root_password?"
